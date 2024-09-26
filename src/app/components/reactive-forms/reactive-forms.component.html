@@ -1,0 +1,47 @@
+<form [formGroup]="formularioRegistro" (ngSubmit)="onSubmit()">
+  <div class="row g-3">
+    <div class="col">
+      <input
+        formControlName="firstName"
+        type="text"
+        class="form-control"
+        placeholder="First name"
+        aria-label="First name"
+      />
+      @if (firstNameControlHasRequiredError) {
+      <small class="text-danger">Este campo es requerido</small>
+      } @if (firstNameControlHasMinLengthError) {
+      <small class="text-danger">
+        Este campo requiere al menos de
+        {{
+          formularioRegistro.get("firstName")?.getError("minlength")
+            ?.requiredLength
+        }}
+        caracteres
+      </small>
+      } @if (firstNameControlHasPatternError) {
+      <small class="text-danger">Este solo admite letras</small>
+      }
+    </div>
+    <div class="col">
+      <input
+        formControlName="lastName"
+        type="text"
+        class="form-control"
+        placeholder="Last name"
+        aria-label="Last name"
+      />
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary w-100">Enviar</button>
+    </div>
+
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <pre>{{ formularioRegistro.value | json }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
