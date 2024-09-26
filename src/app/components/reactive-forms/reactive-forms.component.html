@@ -2,26 +2,17 @@
   <div class="row g-3">
     <div class="col">
       <input
+        [ngClass]="{
+          'is-invalid': firstNameControl?.invalid && firstNameControl?.touched,
+          'is-valid': firstNameControl?.valid && firstNameControl?.touched,
+        }"
         formControlName="firstName"
         type="text"
         class="form-control"
         placeholder="First name"
         aria-label="First name"
       />
-      @if (firstNameControlHasRequiredError) {
-      <small class="text-danger">Este campo es requerido</small>
-      } @if (firstNameControlHasMinLengthError) {
-      <small class="text-danger">
-        Este campo requiere al menos de
-        {{
-          formularioRegistro.get("firstName")?.getError("minlength")
-            ?.requiredLength
-        }}
-        caracteres
-      </small>
-      } @if (firstNameControlHasPatternError) {
-      <small class="text-danger">Este solo admite letras</small>
-      }
+      <app-control-errors [validationErrors]="firstNameControl?.errors" />
     </div>
     <div class="col">
       <input
@@ -30,6 +21,9 @@
         class="form-control"
         placeholder="Last name"
         aria-label="Last name"
+      />
+      <app-control-errors
+        [validationErrors]="formularioRegistro.get('lastName')?.errors"
       />
     </div>
     <div class="col-12">

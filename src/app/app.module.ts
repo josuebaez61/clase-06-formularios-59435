@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsComponent } from './components/reactive-forms/reactive-forms.component';
 import { TemplateDrivenFormsComponent } from './components/template-driven-forms/template-driven-forms.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ControlErrorsComponent } from './components/control-errors/control-errors.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReactiveFormsComponent,
     TemplateDrivenFormsComponent,
+    ControlErrorsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],

@@ -5,6 +5,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import {
+  nameValidator,
+  noHomeroValidator,
+} from '../../utils/custom-validators';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -17,17 +21,10 @@ export class ReactiveFormsComponent {
   constructor(private formBuilder: FormBuilder) {
     // this.formularioRegistro = new FormGroup({})
     this.formularioRegistro = this.formBuilder.group({
-      firstName: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.pattern(/^[a-zA-Z]+$/),
-        ],
-      ],
+      firstName: ['', [nameValidator]],
       // firstName: this.formBuilder.control(''),
       // firstName: new FormControl(''),
-      lastName: [''],
+      lastName: ['', [nameValidator]],
     });
   }
 
@@ -59,7 +56,8 @@ export class ReactiveFormsComponent {
   onSubmit(): void {
     if (this.formularioRegistro.invalid) {
       console.log(this.formularioRegistro.get('firstName')?.errors);
-      alert('El formulario es invalido');
+      // alert('El formulario es invalido');
+      this.formularioRegistro.markAllAsTouched();
     } else {
       console.log(this.formularioRegistro.value);
     }
