@@ -12,17 +12,25 @@
         placeholder="First name"
         aria-label="First name"
       />
-      <app-control-errors [validationErrors]="firstNameControl?.errors" />
+      <app-control-errors
+        *ngIf="firstNameControl?.touched"
+        [validationErrors]="firstNameControl?.errors"
+      />
     </div>
     <div class="col">
       <input
         formControlName="lastName"
+        [ngClass]="{
+          'is-invalid': firstNameControl?.invalid && firstNameControl?.touched,
+          'is-valid': firstNameControl?.valid && firstNameControl?.touched,
+        }"
         type="text"
         class="form-control"
         placeholder="Last name"
         aria-label="Last name"
       />
       <app-control-errors
+        *ngIf="formularioRegistro.get('lastName')?.touched"
         [validationErrors]="formularioRegistro.get('lastName')?.errors"
       />
     </div>
